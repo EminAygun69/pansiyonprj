@@ -1,0 +1,32 @@
+REPOSTORY LİNKİ: https://github.com/mertotron/pansiyonprj.git
+
+tarih 22.07.2024 saat 02:53
+----------------------------------------------------------------
+Proje dosyaları oluşturuldu 
+Router dosyaları eklendi 
+
+---!saat 11:55!---
+
+
+terih 30:07:2024---------00:30
+----------------------------------------------------------------
+
+register.ejs oluşturuldu 
+kullanıcı tablosu oluşturuldu
+CREATE TABLE Kullanicilar (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    phone_number VARCHAR(20) NOT NULL,
+    is_verified TINYINT(1) DEFAULT 0, -- 0: Not Verified, 1: Verified
+    verification_token VARCHAR(255) -- Onaylama için kullanılacak token
+);
+
+
+31.07.2024
+----------------------------------------------------------------
+
+şifreleme fonksiyonları /utils/hash.js de saklanıyor 
+
+hashU hashleme 
