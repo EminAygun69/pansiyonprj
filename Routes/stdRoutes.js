@@ -2,7 +2,7 @@ import express from 'express';
 const router = express.Router();
 import { registerUser } from '../Models/userRegHash.js'; // registerUser fonksiyonunu import edin
 import { verifyEmail } from '../Controllers/mailVeriflicator.js'; // verifyEmail fonksiyonunu import edin
-import { loginControl } from '../Controllers/loginController.js';
+import {loginControl} from '../Controllers/loginControl.js';
 
 
 router.get('/',(req , res) => {

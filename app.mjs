@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 dotenv.config();
+import cookieParser from 'cookie-parser';
 
 
 // __filename ve __dirname'i tanımlayın
@@ -21,6 +22,7 @@ import stdRoutes from './Routes/stdRoutes.js';
 app.set('view engine', 'ejs');
 
 // Middleware ve static dosyalar
+app.use(cookieParser());
 app.use('/Public', express.static(path.join(__dirname, 'Public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

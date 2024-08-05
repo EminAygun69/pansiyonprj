@@ -4,7 +4,7 @@ export async function verifyEmail(req, res) {
     const { token } = req.query;
 
     try {
-        connection.query('SELECT * FROM Kullanicilar WHERE verificationToken = ?', [token], (err, results) => {
+        connection.query('SELECT * FROM Kullanicilar WHERE verification_token= ?', [token], (err, results) => {
             if (err) {
                 console.error('Database query error:', err);
                 res.status(500).send('Bir hata oluştu.');
@@ -18,7 +18,7 @@ export async function verifyEmail(req, res) {
             }
 
             // Kullanıcıyı güncelle
-            connection.query('UPDATE Kullanicilar SET isVerified = true, verificationToken = NULL WHERE verificationToken = ?', [token], (err) => {
+            connection.query('UPDATE Kullanicilar SET is_verified = true, verification_token = ? WHERE verification_token = ?',  [token, token], (err) => {
                 if (err) {
                     console.error('Database update error:', err);
                     res.status(500).send('Bir hata oluştu.');
