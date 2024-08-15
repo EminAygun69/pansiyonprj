@@ -15,5 +15,26 @@
         <a href="/giris">Giriş Yap</a>
         <a href="/profil">Profil</a>
     </nav>
+
+    <div>
+        <% odalar.forEach(function(oda) { %>
+            <div class="oda-karti">
+                <h2><%= oda.oda_adi %></h2>
+                <p>Oda Tipi: <%= oda.oda_tipi %></p>
+                <p>Yatak Sayısı: <%= oda.yatak_sayisi %></p>
+                <p>Kişi Sayısı: <%= oda.kisi_sayisi %></p>
+                <p>Fiyat: <%= oda.fiyat %> TL</p>
+                <p>Açıklama: <%= oda.aciklama %></p>
+                <p>Durum: <%= oda.durum %></p>
+        
+                <div>
+                    <% oda.resimler.forEach(function(resim) { %>
+                        <img src="<%= resim %>" alt="Oda Resmi">
+                    <% }); %>
+                </div>
+            </div>
+        <% }); %>
+    </div>
+    
 </body>
 </html>

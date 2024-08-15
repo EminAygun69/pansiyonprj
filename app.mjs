@@ -16,6 +16,7 @@ const __dirname = path.dirname(__filename);
 
 //rota dosyalarının aktarımı
 import stdRoutes from './Routes/stdRoutes.js';
+import adminRoutes from './Routes/adminRoutes.js';
 
 
 // View engine olarak EJS kullanma
@@ -29,6 +30,7 @@ app.use(express.urlencoded({ extended: true }));
 
 
 app.use('/',stdRoutes);
+app.use('/',adminRoutes);
 
 
 

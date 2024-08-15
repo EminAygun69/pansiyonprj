@@ -33,4 +33,57 @@ CREATE TABLE `kullanicilar` (
 
 şifreleme fonksiyonları /utils/hash.js de saklanıyor 
 
-hashU hashleme 
+tarih 07/08/2024 saat 00:24
+----------------------------------------------------------------
+kullanıcıların kayıt işlemleri tamamlandı 
+kullanıcılar için giriş işlemleri tamamlandı 
+kullanıcı eğer  epostasını doğrulamamış ise giriş yaparken yeniden doğrulama e postası gönderiliyor yoksa giriş kabul edilmiyor
+
+sections under construction
+----------------------------------------------------------------
+
+1. odalar tablosu kodu
+CREATE TABLE Odalar (
+    oda_id INT AUTO_INCREMENT PRIMARY KEY, -- Her oda için benzersiz bir kimlik
+    oda_adi VARCHAR(50) NOT NULL, -- Oda adı veya numarası
+    oda_tipi VARCHAR(50) NOT NULL, -- Oda tipi (örneğin, tek kişilik, çift kişilik, süit)
+    yatak_sayisi INT NOT NULL, -- Oda içindeki yatak sayısı
+    kisi_sayisi INT NOT NULL, -- Odanın alabileceği maksimum kişi sayısı
+    fiyat DECIMAL(10, 2) NOT NULL, -- Oda fiyatı
+    aciklama TEXT, -- Oda ile ilgili açıklamalar
+    durum ENUM('müsait', 'dolu', 'bakimda') DEFAULT 'müsait', -- Oda durumu
+    olusturma_tarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Oda eklenme tarihi
+    guncelleme_tarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP -- Son güncelleme tarihi
+);
+
+2. rezervasyonlar tablosu kodu
+CREATE TABLE Rezervasyonlar (
+    rezervasyon_id INT AUTO_INCREMENT PRIMARY KEY, -- Rezervasyonlar tablosu için benzersiz kimlik
+    oda_id INT NOT NULL, -- Rezervasyon yapılan oda id'si (yabancı anahtar)
+    kullanici_id INT NOT NULL, -- Rezervasyonu yapan kullanıcı id'si (yabancı anahtar)
+    email VARCHAR(100) NOT NULL, -- Rezervasyonu yapan kişinin e-posta adresi
+    telefon_numarasi VARCHAR(20), -- Rezervasyonu yapan kişinin telefon numarası
+    baslangic_tarihi DATE NOT NULL, -- Rezervasyon başlangıç tarihi
+    bitis_tarihi DATE NOT NULL, -- Rezervasyon bitiş tarihi
+    toplam_fiyat DECIMAL(10, 2) NOT NULL, -- Rezervasyon toplam fiyatı
+    durum ENUM('kapali' , 'bekliyor', 'onaylandi', 'bosta', 'iptal') DEFAULT 'bosta', -- Rezervasyon durumu
+    olusturma_tarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Rezervasyon oluşturulma tarihi
+    guncelleme_tarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP, -- Son güncelleme tarihi
+    FOREIGN KEY (oda_id) REFERENCES Odalar(oda_id), -- Odalar tablosuna yabancı anahtar
+    FOREIGN KEY (kullanici_id) REFERENCES Kullanicilar(id) -- Kullanıcılar tablosuna yabancı anahtar
+);
+
+oda_id: Odalar tablosundaki odaların kimliğini referans alır. Böylece hangi oda için rezervasyon yapıldığını belirler.
+kullanici_id: Kullanicilar tablosundaki kullanıcıların kimliğini referans alır. Rezervasyonu yapan kullanıcıyı belirlemek için kullanılır.
+email ve telefon_numarasi: Rezervasyonu yapan kişinin iletişim bilgilerini içerir. Bu bilgiler, rezervasyon esnasında alınabilir ve kullanıcı bilgilerinden farklı olabilir.
+
+ÖNEMLİ NOT ADMİN PANELE GİRİŞTE AÇIK VAR UYGUN MANİPLASYON İLE EJS DEKİ MESSAGE DEĞİŞKENİ ADMİN OLARAK AYARLANABİLİR --
+BU YÜZDEN ADMİN PANELE GİRİŞTE TOKEN ÜZERİNDEN BİR KONTROL DAHA YAPMAN GEREK
+
+tarih 08.08.2024 saat 17.32
+----------------------------------------------------------------
+
+veritabanı odalar için tablolar oluşturuldu 
+admin panel yapılıyor 
+admin panel yetki kontrolü yapılıyor 
+-/process/admin rotasına post atacak oda eklemek için olan form oluşturuluyor 

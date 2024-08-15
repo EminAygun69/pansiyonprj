@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <form action="/process/admin/addRoom" method="post">
+        <label for="Oda Adı">Oda Adı</label>
+        <input type="text" name="odaAdi" id="odaAdi">
+        <h1>ODA EKLE</h1>
+        <br>
+        <label for="odaTipi">Kaç Kişilik</label>
+        <select Name="odaTipi" Size="4">  
+            <option> 1 Kişilik </option>  
+            <option> 2 Kişilik </option>  
+            <option> 3 Kişilik </option>  
+            <option> 4 Kişilik </option>  
+        </select>    
+        <label for="yatakSayisi">Yatak Sayısı</label>
+        <input type="number" name="yatakSayisi" id="yatakSayisi">
+        <br>
+        <label for="kisiSayisi">Odanın Alablileceği Max Kişi Sayısı</label>
+        <input type="number" name="kisiSayisi" id="kisiSayisi">
+        <br>
+        <label for="fiyat">Odanın Fiyatı</label>
+        <input type="number" id="fiyat" name="fiyat" step="0.01" min="0" required>
+        <br>
+        <label for="odaAciklama">Odanın Açıklaması</label>
+        <input type="text" name="odaAciklama" id="odaAciklama">
+        <br>
+        <label for="odaDurum">Oda Durumu</label>
+        <select Name="odaDurum" Size="3">  
+            <option> müsait </option>  
+            <option> dolu </option>  
+            <option> bakımda </option>
+        </select>
+        <br>
+        <label for="olusturmaTarihi">Oluşturma Tarihi</label>
+        <input type="datetime-local" id="olusturmaTarihi" name="olusturmaTarihi">
+        <input type="submit">
+    </form>
+    <h1><%= message %></h1>
+    <br>
+    <h1>Silmek istediğiniz oda numarasını</h1>
+    <form action="/process/admin/deleteRoom" method="post">
+        <label for="roomNumber">Oda Numarasını girin</label>
+        <input type="number" name="roomNumber" id="roomNumber">
+        <input type="submit">
+    </form>
+    <table border="1">
+        <tr>
+            <td> oda_id </td>
+            <td> oda_adi </td>
+            <td> oda_tipi </td>
+            <td> yatak_sayisi </td>
+            <td> kisi_sayisi </td>
+            <td> fiyat </td>
+            <td> durum </td>
+        </tr>
+        <% rooms.forEach(function(room) { %>
+            <tr>
+                <td><%= room.oda_id %></td>
+                <td><%= room.oda_adi %></td>
+                <td><%= room.oda_tipi %></td>
+                <td><%= room.yatak_sayisi %></td>
+                <td><%= room.kisi_sayisi %></td>
+                <td><%= room.fiyat %></td>
+                <td><%= room.durum %></td>
+            </tr>
+        <% }); %>
+        <br>
+    <h1>Oda Resmi Yükle</h1>
+    <form action="/process/admin/roompictureAdd" method="POST" enctype="multipart/form-data">
+        <label for="odaId">Resim Eklenecek Odanın İd Sini Giriniz</label>
+        <input type="number" name="odaId" id="odaId">
+        <label for="roomImage">Resim Dosyası Seçin:</label>
+        <input type="file" name="roomImage" id="roomImage" accept="image/*" required>
+        <button type="submit">Yükle</button>
+    </form>
+        
+    </table>
+
+
+    <script></script>
+</body>
+</html>

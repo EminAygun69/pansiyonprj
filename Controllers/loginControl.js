@@ -53,7 +53,7 @@ export async function loginControl(req, res) {
                     maxAge: 3600000 // 1 saat
                 });
                 console.log('GİRİŞ YAPILDI');
-                return res.status(200).render('profil', { message: 'You are logged in' });
+                return res.status(200).render('profil', { priority: 'admin' });
             } else {
                 console.log('Email doğrulama yapılmadı');
                 // Yeni doğrulama token'ı oluştur
